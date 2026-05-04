@@ -12,10 +12,10 @@ importers:
         specifier: ^1.6.16
         version: 1.6.16
       lucide-vue-next:
-        specifier: ^1.0.0
-        version: 1.0.0(vue@3.5.33(typescript@6.0.3))
+        specifier: ^0.378.0
+        version: 0.378.0(vue@3.5.33(typescript@6.0.3))
       vue:
-        specifier: ^3.5.33
+        specifier: ^3.0.0
         version: 3.5.33(typescript@6.0.3)
     devDependencies:
       '@vitejs/plugin-vue':
@@ -596,8 +596,8 @@ packages:
     resolution: {integrity: sha512-arhlxbFRmoQHl33a0Zkle/YWlmNwoyt6QNZEIJcqNbdrsix5Lvc4HyyI3EnwxTYlZYc32EbYrQ8SzEZ7dqgg9A==}
     engines: {node: '>=14'}
 
-  lucide-vue-next@1.0.0:
-    resolution: {integrity: sha512-V6SPvx1IHTj/UY+FrIYWV5faISsPSb8BnWSFDxAtezWKvWc9ZZ40PDrdu1/Qb5vg4lHWr1hs1BAMGVGm6V1Xdg==}
+  lucide-vue-next@0.378.0:
+    resolution: {integrity: sha512-tz2IUhdOf1q0x1mPOTZEJZYfXVLreQorO2ax4M+CxGOTgCNgXH3cljIWWfJ4jUvxn5rbkFlGPbl9EIfIelZBRA==}
     peerDependencies:
       vue: '>=3.0.1'
 
@@ -1199,7 +1199,7 @@ snapshots:
       pkg-types: 2.3.1
       quansync: 0.2.11
 
-  lucide-vue-next@1.0.0(vue@3.5.33(typescript@6.0.3)):
+  lucide-vue-next@0.378.0(vue@3.5.33(typescript@6.0.3)):
     dependencies:
       vue: 3.5.33(typescript@6.0.3)
 
