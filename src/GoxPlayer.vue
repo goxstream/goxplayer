@@ -255,7 +255,7 @@ onUnmounted(() => {
                 :show="showSpeedMenu" 
                 :options="speedOptions.map(r => ({label: `${r}x`, value: r}))"
                 :selected-value="playbackRate"
-                @select="playbackRate = $event; videoRef.playbackRate = $event; showSpeedMenu = false"
+                @select="playbackRate = $event; if(videoRef) videoRef.playbackRate = $event; showSpeedMenu = false"
                 width="8rem"
               />
             </div>
