@@ -46,24 +46,25 @@ const {
   handleVolumeChange, toggleFullscreen
 } = usePlayerState()
 
-// 2. Logic: HLS
-const currentSource = computed(() => {
-  return props.sources.find(s => s.quality === selectedQuality.value) || props.sources[0]
-})
-const { hls, initHls, destroyHls } = useHls(videoRef, currentSource, props.autoPlay)
-
-// 3. Logic: Gestures
-const { 
-  skipOverlay, handlePointerDown, handlePointerUp, handlePointerLeave 
-} = useGestures(videoRef, containerRef, isPlaying, showControls, playbackRate, is2x, togglePlay)
-
-// 4. Local UI Logic
+// 2. Local UI Logic (Must be defined before computed/composables that use them)
 const selectedQuality = ref(props.initialQuality || '360p')
 const showQualityMenu = ref(false)
 const showSpeedMenu = ref(false)
 const speedOptions = [0.5, 1.0, 1.5, 2.0, 3.0, 4.0]
 const selectedSubtitle = ref<string | null>(null)
 const showSubtitleMenu = ref(false)
+
+// 3. Logic: HLS & Source
+const currentSource = computed(() => {
+  return props.sources.find(s => s.quality === selectedQuality.value) || props.sources[0]
+})
+const { hls, initHls, destroyHls } = useHls(videoRef, currentSource, props.autoPlay)
+
+// 4. Logic: Gestures
+const { 
+  skipOverlay, handlePointerDown, handlePointerUp, handlePointerLeave 
+} = useGestures(videoRef, containerRef, isPlaying, showControls, playbackRate, is2x, togglePlay)
+
 
 const formatTime = (seconds: number) => {
   if (isNaN(seconds)) return '0:00'
