@@ -1,6 +1,6 @@
 {
   "name": "goxplayer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "files": [
@@ -14,7 +14,7 @@
       "import": "./dist/goxplayer.es.js",
       "require": "./dist/goxplayer.umd.js"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/goxplayer.css"
   },
   "types": "./dist/types/index.d.ts",
   "scripts": {
