@@ -2,6 +2,14 @@
   "name": "goxplayer",
   "version": "0.0.4",
   "description": "",
+  "keywords": [
+    "video",
+    "player",
+    "hls",
+    "vue"
+  ],
+  "author": "goxstream",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist"
