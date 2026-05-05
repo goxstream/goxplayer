@@ -60,6 +60,10 @@ const currentSource = computed(() => {
 })
 const { hls, initHls, destroyHls } = useHls(videoRef, currentSource, props.autoPlay)
 
+watch(currentSource, () => {
+  loading.value = true
+})
+
 // 4. Logic: Gestures
 const { 
   skipOverlay, handlePointerDown, handlePointerUp, handlePointerLeave 
