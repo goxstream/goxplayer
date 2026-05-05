@@ -47,7 +47,6 @@ const {
 } = usePlayerState()
 
 // 2. Local UI Logic (Must be defined before computed/composables that use them)
-const selectedQuality = ref(props.initialQuality || '360p')
 const showQualityMenu = ref(false)
 const showSpeedMenu = ref(false)
 const speedOptions = [0.5, 1.0, 1.5, 2.0, 3.0, 4.0]
@@ -55,8 +54,14 @@ const selectedSubtitle = ref<string | null>(null)
 const showSubtitleMenu = ref(false)
 
 // 3. Logic: HLS & Source
+const sourcesLowToHigh = computed(() => {
+  return [...props.sources].sort((a, b) => (parseInt(a.quality) || 0) - (parseInt(b.quality) || 0))
+})
+
+const selectedQuality = ref(props.initialQuality || (sourcesLowToHigh.value[0]?.quality || '360p'))
+
 const currentSource = computed(() => {
-  return props.sources.find(s => s.quality === selectedQuality.value) || props.sources[0]
+  return props.sources.find(s => s.quality === selectedQuality.value) || sourcesLowToHigh.value[0] || props.sources[0]
 })
 const { hls, initHls, destroyHls } = useHls(videoRef, currentSource, props.autoPlay)
 
@@ -133,7 +138,7 @@ const changeQuality = (q: string) => {
   emit('quality-change', q)
 }
 
-const sortedSources = computed(() => {
+const sourcesHighToLow = computed(() => {
   return [...props.sources].sort((a, b) => (parseInt(b.quality) || 0) - (parseInt(a.quality) || 0))
 })
 
@@ -163,8 +168,11 @@ onUnmounted(() => {
       @pause="isPlaying = false; emit('pause')"
       @timeupdate="onTimeUpdate"
       @loadedmetadata="duration = $event.target.duration; loading = false"
+      @canplay="loading = false"
+      @canplaythrough="loading = false"
       @waiting="loading = true"
       @playing="loading = false"
+      @error="loading = false"
       @pointerdown="handlePointerDown"
       @pointerup="handlePointerUp"
       @pointerleave="handlePointerLeave"
@@ -273,7 +281,7 @@ onUnmounted(() => {
               </button>
               <MenuOverlay 
                 :show="showQualityMenu" 
-                :options="sortedSources.map(s => ({label: s.quality, value: s.quality}))"
+                :options="sourcesHighToLow.map(s => ({label: s.quality, value: s.quality}))"
                 :selected-value="selectedQuality"
                 @select="changeQuality"
               />
